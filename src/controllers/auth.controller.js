@@ -1,7 +1,7 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import ApiError from "../utils/ApiError.js";
-import User from "../models/User.model.js";
+import User from "../models/user.model.js";
 import { generateAccessAndRefreshTokens } from "../utils/generateToken.js";
 import jwt from "jsonwebtoken";
 import { accessTokenOptions, refreshTokenOptions } from "../utils/cookieOptions.js";

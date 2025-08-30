@@ -1,7 +1,7 @@
 // middleware/authMiddleware.js
 import jwt from "jsonwebtoken";
 import ApiError from "../utils/ApiError.js";
-import User from "../models/User.model.js";
+import User from "../models/user.model.js";
 
 export const authMiddleware = async (req, res, next) => {
   try {
@@ -28,4 +28,21 @@ export const authMiddleware = async (req, res, next) => {
   } catch (error) {
     next(new ApiError(401, error.message || "Not authorized"));
   }
+};
+
+
+
+
+export const doctorOnly = (req, res, next) => {
+  if (!req.user || req.user.role !== "doctor") {
+    return next(new ApiError(403, "Access denied: doctors only"));
+  }
+  next();
+};
+
+export const adminOnly = (req, res, next) => {
+  if (!req.user || req.user.role !== "admin") {
+    return next(new ApiError(403, "Access denied: admins only"));
+  }
+  next();
 };
